@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دليل الزكاة التفاعلي</title>
     <!-- Chosen Palette: Calm Harmony -->
-    <!-- Application Structure Plan: A thematic, dashboard-style single-page application. The structure is designed for an exploratory user experience, guiding the user from foundational concepts to practical application and detailed inquiries. It starts with a hero section, followed by 'Core Concepts' using interactive cards, a central 'Zakat Calculator' for practical engagement, a 'Recipients of Zakat' section with a Chart.js visualization, an 'FAQ' section with an accordion for specific rulings, and an "Ask an Expert" section. This structure prioritizes user engagement and understanding. -->
-    <!-- Visualization & Content Choices: 1. Core Concepts: Interactive HTML cards (Goal: Inform). 2. Zakat Calculator: Dynamic HTML form with JS (Goal: Apply). 3. Recipients: Chart.js Donut chart (Goal: Visualize). 4. FAQ: HTML/JS accordion (Goal: Organize). 5. Ask an Expert (اسأل خبيرًا) - A form that provides personalized Fiqh guidance. 6. Suggest a Dua (اقتراح دعاء) - A button appears after calculation to suggest a personalized prayer. -->
+    <!-- Application Structure Plan: A thematic, dashboard-style single-page application. The structure is designed for an exploratory user experience, guiding the user from foundational concepts to practical application and detailed inquiries. It starts with a hero section, followed by 'Core Concepts' using interactive cards, a central 'Zakat Calculator' for practical engagement, a 'Recipients of Zakat' section with a Chart.js visualization, an 'FAQ' section with an accordion for specific rulings, and a new Gemini-powered "Ask an Expert" section. This structure prioritizes user engagement and understanding. -->
+    <!-- Visualization & Content Choices: 1. Core Concepts: Interactive HTML cards (Goal: Inform). 2. Zakat Calculator: Dynamic HTML form with JS (Goal: Apply). 3. Recipients: Chart.js Donut chart (Goal: Visualize). 4. FAQ: HTML/JS accordion (Goal: Organize). 5. New: Ask an Expert (اسأل خبيرًا) - A form that calls the Gemini API to answer user-specific questions, providing deep, personalized Fiqh guidance. 6. New: Suggest a Dua (اقتراح دعاء) - A button appears after calculation to call Gemini for a personalized prayer. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -166,7 +166,7 @@
         
         <!-- Ask an Expert Section -->
         <section id="expert-ask" class="py-12 my-8">
-            <h2 class="text-3xl font-bold text-center mb-8 text-[#739072]">✨ اسأل خبيرًا </h2>
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#739072]">✨ اسأل خبيرًا</h2>
             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl max-w-4xl mx-auto border-2 border-[#EAC696]">
                 <p class="text-center mb-6">هل لديك سؤال محدد حول الزكاة يتعلق بحالتك الشخصية؟ اكتب سؤالك هنا وسنقدم لك إجابة فقهية إرشادية.</p>
                 <div class="rtl">
@@ -180,7 +180,9 @@
                         <div id="expert-loader" class="loader hidden"></div>
                         <div id="expert-answer" class="bg-[#FDF6E3] p-4 rounded-lg whitespace-pre-wrap"></div>
                     </div>
-                     
+                     <p class="text-xs text-center mt-4 text-gray-500">
+                        إخلاء مسؤولية: هذه الإجابة تم إنشاؤها بواسطة الذكاء الاصطناعي للإرشاد العام، وينصح دائمًا باستشارة عالم دين مؤهل للمسائل الشخصية.
+                    </p>
                 </div>
             </div>
         </section>
@@ -388,13 +390,23 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
+                
+                if (!response.ok) {
+                    const errorBody = await response.text();
+                    throw new Error(`HTTP error! status: ${response.status}, body: ${errorBody}`);
+                }
+                
                 const result = await response.json();
                 
-                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+                if (result.error) {
+                    console.error("API Error:", result.error);
+                    answerDiv.innerText = `حدث خطأ من الواجهة البرمجية: ${result.error.message}`;
+                } else if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
                     const text = result.candidates[0].content.parts[0].text;
                     answerDiv.innerText = text;
                 } else {
-                    answerDiv.innerText = "عذراً، لم أتمكن من العثور على إجابة. يرجى المحاولة مرة أخرى أو إعادة صياغة سؤالك.";
+                    console.error("Unexpected API response structure:", result);
+                    answerDiv.innerText = "عذراً، لم أتمكن من فهم الرد من الخادم. يرجى المحاولة مرة أخرى.";
                 }
             } catch (error) {
                 console.error("Error calling Expert API:", error);
@@ -436,11 +448,17 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
+
+                if (!response.ok) {
+                     throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
                 const result = await response.json();
                  if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
                     const text = result.candidates[0].content.parts[0].text;
                     duaText.innerText = text;
                 } else {
+                    console.error("Unexpected API response for Dua:", result);
                     duaText.innerText = "اللهم تقبل منا إنك أنت السميع العليم.";
                 }
             } catch(error) {
@@ -455,10 +473,9 @@
         // Initial call to set correct nisab info
         updateNisabInfo();
     </script>
-    
     <footer style="text-align: center; margin-top: 30px; padding: 20px; border-top: 1px solid #eee; font-family: 'Noto Kufi Arabic', sans-serif; direction: rtl;">
         <p>صمم بواسطة: أحمد علام</p>
-        <p>طالب بمركز الثقافة الاسلامية بالمنوفية</p>
+        <p>طالب بمركز الثقافة الإسلامية بالمنوفية</p>
     </footer>
 </body>
 </html>
