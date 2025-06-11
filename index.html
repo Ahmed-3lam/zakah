@@ -10,7 +10,11 @@
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="config.js"></script>
+    <script>
+        // Fallback configuration if config.js is not available
+        window.CONFIG = window.CONFIG || { API_KEY: "" };
+    </script>
+    <script src="config.js" onerror="console.warn('Config file not found, using fallback values');"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
@@ -367,7 +371,7 @@
         const answerDiv = document.getElementById('expert-answer');
         const questionInput = document.getElementById('zakat-question');
 
-        async function askExpert() {
+        function askExpert() {
             const question = questionInput.value;
             if (!question.trim()) {
                 answerDiv.innerText = "الرجاء كتابة سؤالك أولاً.";
@@ -377,7 +381,46 @@
             loader.classList.remove('hidden');
             answerDiv.innerText = "";
             askButton.disabled = true;
+            
+            // Check if API key is available
+            if (!CONFIG.API_KEY) {
+                // If no API key, use predefined answers
+                setTimeout(() => {
+                    const answers = {
+                        "زكاة الذهب": "تجب الزكاة في الذهب إذا بلغ نصاباً (85 جراماً) وحال عليه الحول. ومقدار الزكاة فيه هو ربع العشر (2.5%). ويُضم الذهب والفضة بعضهما إلى بعض في تكميل النصاب عند جمهور العلماء.",
+                        "زكاة الفضة": "تجب الزكاة في الفضة إذا بلغت نصاباً (595 جراماً) وحال عليها الحول. ومقدار الزكاة فيها هو ربع العشر (2.5%). ويُضم الذهب والفضة بعضهما إلى بعض في تكميل النصاب عند جمهور العلماء.",
+                        "زكاة النقود": "تجب الزكاة في النقود (الأوراق المالية) إذا بلغت قيمة نصاب الذهب أو الفضة وحال عليها الحول. ومقدارها ربع العشر (2.5%).",
+                        "زكاة الأسهم": "تختلف زكاة الأسهم باختلاف نوع الشركة ونية المساهم. إذا كانت للمتاجرة فتزكى زكاة عروض التجارة (2.5%). وإذا كانت للاستثمار فتزكى أرباحها فقط.",
+                        "زكاة العقارات": "العقارات المعدة للسكنى لا زكاة فيها. أما المعدة للتجارة فتزكى زكاة عروض التجارة (2.5%). والمعدة للإيجار تزكى غلتها فقط إذا حال عليها الحول.",
+                        "زكاة الرواتب": "لا تجب الزكاة في الرواتب إلا إذا حال عليها الحول وبلغت النصاب بعد خصم النفقات الأساسية. وتزكى بنسبة 2.5%.",
+                        "زكاة الديون": "الديون التي لك على الآخرين تزكى إذا كانت مرجوة السداد. أما الديون التي عليك فتخصم من الأموال الزكوية قبل حساب الزكاة.",
+                        "زكاة الحلي": "اختلف العلماء في زكاة حلي النساء المستعمل، فالجمهور على أنه لا زكاة فيه، والحنفية يرون وجوب الزكاة فيه.",
+                        "زكاة الزروع": "تجب الزكاة في الزروع والثمار إذا بلغت نصاباً (5 أوسق = حوالي 653 كجم). ومقدارها العشر (10%) إذا سقيت بماء المطر، ونصف العشر (5%) إذا سقيت بآلة.",
+                        "زكاة الأنعام": "تجب الزكاة في الإبل والبقر والغنم إذا بلغت النصاب وحال عليها الحول وكانت سائمة (ترعى الكلأ المباح). ولكل نوع نصاب ومقدار مختلف.",
+                        "مصارف الزكاة": "مصارف الزكاة ثمانية ذكرها الله تعالى في القرآن الكريم: الفقراء، المساكين، العاملين عليها، المؤلفة قلوبهم، في الرقاب، الغارمين، في سبيل الله، وابن السبيل.",
+                        "شروط الزكاة": "شروط وجوب الزكاة هي: الإسلام، الحرية، الملك التام، النماء، بلوغ النصاب، حولان الحول (في غير الزروع والثمار)، الفضل عن الحوائج الأصلية."
+                    };
+                    
+                    let foundAnswer = false;
+                    for (const [keyword, answer] of Object.entries(answers)) {
+                        if (question.includes(keyword) || question.toLowerCase().includes(keyword.toLowerCase())) {
+                            answerDiv.innerText = answer;
+                            foundAnswer = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!foundAnswer) {
+                        answerDiv.innerText = "شكراً لسؤالك حول الزكاة. يُنصح بالرجوع إلى أهل العلم المتخصصين في الفقه الإسلامي للحصول على فتوى دقيقة تناسب حالتك الخاصة. وبشكل عام، تجب الزكاة على المسلم البالغ العاقل الحر إذا ملك نصاباً وحال عليه الحول، ومقدارها 2.5% في الأموال النقدية وعروض التجارة.";
+                    }
+                    
+                    loader.classList.add('hidden');
+                    askButton.disabled = false;
+                }, 800); // Simulate delay for more natural response
+                return;
+            }
 
+            // If API key is available, try to call the API
             const prompt = `بصفتك خبيرًا في الفقه الإسلامي، وبالاستناد إلى محتوى كتاب "الفقه الواضح"، أجب عن السؤال التالي المتعلق بالزكاة إجابة واضحة ومفصلة ومبنية على الأدلة من القرآن والسنة مع مراعاة آراء المذاهب الأربعة قدر الإمكان. السؤال هو: ${question}`;
             
             const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
@@ -385,37 +428,39 @@
             const apiKey = CONFIG.API_KEY;
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
                 if (!response.ok) {
-                    const errorBody = await response.text();
-                    throw new Error(`HTTP error! status: ${response.status}, body: ${errorBody}`);
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
-                const result = await response.json();
-                
+                return response.json();
+            })
+            .then(result => {
                 if (result.error) {
                     console.error("API Error:", result.error);
                     answerDiv.innerText = `حدث خطأ من الواجهة البرمجية: ${result.error.message}`;
-                } else if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+                } else if (result.candidates && result.candidates.length > 0 && 
+                           result.candidates[0].content && result.candidates[0].content.parts && 
+                           result.candidates[0].content.parts.length > 0) {
                     const text = result.candidates[0].content.parts[0].text;
                     answerDiv.innerText = text;
                 } else {
                     console.error("Unexpected API response structure:", result);
                     answerDiv.innerText = "عذراً، لم أتمكن من فهم الرد من الخادم. يرجى المحاولة مرة أخرى.";
                 }
-            } catch (error) {
+            })
+            .catch(error => {
                 console.error("Error calling Expert API:", error);
                 answerDiv.innerText = "حدث خطأ أثناء محاولة الحصول على إجابة. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.";
-            } finally {
+            })
+            .finally(() => {
                 loader.classList.add('hidden');
                 askButton.disabled = false;
-            }
+            });
         }
 
         // Dua Modal Logic
@@ -431,11 +476,32 @@
             duaModal.classList.add('hidden');
         }
 
-        async function getDua(context, amount) {
+        function getDua(context, amount) {
             openModal();
             duaLoader.classList.remove('hidden');
             duaText.innerText = "";
             
+            // Check if API key is available
+            if (!CONFIG.API_KEY) {
+                // If no API key, use pre-defined duas
+                setTimeout(() => {
+                    const duas = [
+                        "اللهم تقبل منا صدقاتنا وزكاتنا، وبارك لنا في أموالنا وأهلنا، واجعلها طهوراً لنا.",
+                        "اللهم اجعل زكاتنا مقبولة، وأخلف علينا ما أنفقنا، وزدنا من فضلك إنك على كل شيء قدير.",
+                        "اللهم تقبل منا إنك أنت السميع العليم، وبارك لنا فيما أبقيت، واجعل ما أخرجنا طهرة لأموالنا.",
+                        "اللهم اجعل زكاتنا سبباً في تطهير أموالنا وتزكية نفوسنا، وبارك لنا في رزقنا واجعلنا من الشاكرين.",
+                        "اللهم تقبل منا صالح الأعمال وبارك لنا في أرزاقنا، واجعل زكاتنا في ميزان حسناتنا يوم نلقاك."
+                    ];
+                    
+                    // Select a random dua from the array
+                    const randomIndex = Math.floor(Math.random() * duas.length);
+                    duaText.innerText = duas[randomIndex];
+                    duaLoader.classList.add('hidden');
+                }, 800);
+                return;
+            }
+            
+            // If API key is available, try to call the API
             const prompt = `اكتب دعاءً قصيراً ومؤثراً باللغة العربية لشخص أخرج زكاة ${context} بمقدار ${amount}. يجب أن يطلب الدعاء من الله قبول الزكاة والبركة في المال والأهل والرزق.`;
 
             const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
@@ -443,32 +509,35 @@
             const apiKey = CONFIG.API_KEY;
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
             
-            try {
-                 const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
                 if (!response.ok) {
-                     throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-
-                const result = await response.json();
-                 if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+                return response.json();
+            })
+            .then(result => {
+                if (result.candidates && result.candidates.length > 0 && 
+                    result.candidates[0].content && result.candidates[0].content.parts && 
+                    result.candidates[0].content.parts.length > 0) {
                     const text = result.candidates[0].content.parts[0].text;
                     duaText.innerText = text;
                 } else {
                     console.error("Unexpected API response for Dua:", result);
                     duaText.innerText = "اللهم تقبل منا إنك أنت السميع العليم.";
                 }
-            } catch(error) {
+            })
+            .catch(error => {
                 console.error("Error calling API for Dua:", error);
                 duaText.innerText = "اللهم تقبل منا صالح الأعمال وبارك لنا في أرزاقنا.";
-            } finally {
+            })
+            .finally(() => {
                 duaLoader.classList.add('hidden');
-            }
-
+            });
         }
 
         // Initial call to set correct nisab info

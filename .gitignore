@@ -5,4 +5,3 @@ config.js
 .DS_Store
 node_modules/
 .env
-config.js
