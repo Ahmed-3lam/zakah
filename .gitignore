@@ -5,3 +5,4 @@ config.js
 .DS_Store
 node_modules/
 .env
+create_repo.sh
