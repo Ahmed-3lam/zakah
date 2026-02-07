@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
             font-family: 'Cairo', sans-serif;
             scroll-behavior: smooth;
         }
+
         .chart-container {
             position: relative;
             margin: auto;
@@ -26,19 +28,23 @@
             max-width: 450px;
             max-height: 450px;
         }
+
         .tab-button.active {
             border-color: #739072;
             color: #739072;
             background-color: #F5E8C7;
         }
+
         .accordion-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
+
         .rtl {
             direction: rtl;
         }
+
         .loader {
             border: 5px solid #f3f3f3;
             border-top: 5px solid #739072;
@@ -48,22 +54,30 @@
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
+
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
         }
+
         .modal-content {
             background: white;
             padding: 2rem;
@@ -74,6 +88,7 @@
         }
     </style>
 </head>
+
 <body class="bg-[#FDF6E3] text-[#65451F]">
 
     <!-- Header & Navigation -->
@@ -90,27 +105,32 @@
                 </div>
                 <div class="md:hidden">
                     <button id="menu-btn" class="text-[#65451F] focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
                     </button>
                 </div>
             </div>
             <div id="mobile-menu" class="hidden md:hidden mt-4">
-                 <a href="#concepts" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">مفاهيم أساسية</a>
-                 <a href="#calculator" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">حاسبة الزكاة</a>
-                 <a href="#recipients" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">مصارف الزكاة</a>
-                 <a href="#faq" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">مسائل خاصة</a>
-                 <a href="#gemini-ask" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">اسأل خبيراً</a>
+                <a href="#concepts" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">مفاهيم أساسية</a>
+                <a href="#calculator" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">حاسبة الزكاة</a>
+                <a href="#recipients" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">مصارف الزكاة</a>
+                <a href="#faq" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">مسائل خاصة</a>
+                <a href="#gemini-ask" class="block py-2 px-4 text-sm hover:bg-[#EAC696]">اسأل خبيراً</a>
             </div>
         </nav>
     </header>
 
     <main class="container mx-auto p-4 md:p-8">
-        
+
         <!-- Hero Section -->
         <section class="text-center py-12">
             <h2 class="text-4xl font-bold text-[#739072] mb-4">الزكاة: الركن الثالث من أركان الإسلام</h2>
             <p class="text-lg max-w-3xl mx-auto">
-                مرحباً بك في الدليل التفاعلي الشامل لأحكام الزكاة. يهدف هذا الدليل إلى تبسيط المفاهيم المعقدة وتقديم الأدوات اللازمة لحساب زكاتك وفهم مصارفها، والآن معزز بقدرات Gemini للرد على استفساراتكم الفقهية.
+                مرحباً بك في الدليل التفاعلي الشامل لأحكام الزكاة. يهدف هذا الدليل إلى تبسيط المفاهيم المعقدة وتقديم
+                الأدوات اللازمة لحساب زكاتك وفهم مصارفها، والآن معزز بقدرات Gemini للرد على استفساراتكم الفقهية.
             </p>
         </section>
 
@@ -120,11 +140,14 @@
             <div class="grid md:grid-cols-3 gap-8 text-center">
                 <div class="bg-[#FDF6E3] p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-semibold mb-3">ما هي الزكاة؟</h3>
-                    <p>الزكاة لغةً هي النماء والطهارة والبركة. وشرعًا، هي حق واجب في مال خاص لطائفة مخصوصة في وقت مخصوص. وهي عبادة مالية وركن أساسي لتطهير المال والنفس وتحقيق التكافل الاجتماعي.</p>
+                    <p>الزكاة لغةً هي النماء والطهارة والبركة. وشرعًا، هي حق واجب في مال خاص لطائفة مخصوصة في وقت مخصوص.
+                        وهي عبادة مالية وركن أساسي لتطهير المال والنفس وتحقيق التكافل الاجتماعي.</p>
                 </div>
                 <div class="bg-[#FDF6E3] p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-semibold mb-3">أهميتها في الإسلام</h3>
-                    <p>قرن الله سبحانه وتعالى الزكاة بالصلاة في مواضع كثيرة من القرآن الكريم، مما يدل على عظيم منزلتها. قال تعالى: ﴿وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ﴾. وهي سبب لنيل رحمة الله والفلاح في الدنيا والآخرة.</p>
+                    <p>قرن الله سبحانه وتعالى الزكاة بالصلاة في مواضع كثيرة من القرآن الكريم، مما يدل على عظيم منزلتها.
+                        قال تعالى: ﴿وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ﴾. وهي سبب لنيل رحمة الله والفلاح في الدنيا
+                        والآخرة.</p>
                 </div>
                 <div class="bg-[#FDF6E3] p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-semibold mb-3">شروط وجوبها</h3>
@@ -134,7 +157,8 @@
                         <li><strong>الملك التام:</strong> أن يكون المال مملوكاً لصاحبه ملكاً تاماً.</li>
                         <li><strong>النماء:</strong> أن يكون المال نامياً بالفعل أو بالقوة.</li>
                         <li><strong>بلوغ النصاب:</strong> وهو المقدار المعين شرعاً الذي تجب الزكاة ببلوغه.</li>
-                        <li><strong>حولان الحول:</strong> أن يمضي على امتلاك النصاب عام هجري كامل (في غير الزروع والثمار).</li>
+                        <li><strong>حولان الحول:</strong> أن يمضي على امتلاك النصاب عام هجري كامل (في غير الزروع
+                            والثمار).</li>
                     </ul>
                 </div>
             </div>
@@ -145,34 +169,241 @@
             <h2 class="text-3xl font-bold text-center mb-8 text-[#739072]">حاسبة الزكاة</h2>
             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl max-w-4xl mx-auto border-2 border-[#EAC696]">
                 <p class="text-center mb-6">
-                    تهدف هذه الحاسبة إلى تيسير حساب الزكاة بأنواعها المختلفة. اختر نوع المال الذي تريد حساب زكاته واتبع الخطوات.
+                    تهدف هذه الحاسبة إلى تيسير حساب الزكاة بأنواعها المختلفة. اختر نوع المال الذي تريد حساب زكاته واتبع
+                    الخطوات.
                 </p>
-                <div class="mb-6 border-b-2 border-[#EAC696] flex justify-center flex-wrap">
-                    <button class="tab-button p-4 text-lg font-semibold border-b-4 border-transparent active" onclick="showTab('money')">النقود والذهب والفضة</button>
-                    <button class="tab-button p-4 text-lg font-semibold border-b-4 border-transparent" onclick="showTab('trade')">عروض التجارة</button>
-                    <button class="tab-button p-4 text-lg font-semibold border-b-4 border-transparent" onclick="showTab('agriculture')">الزروع والثمار</button>
+                <div class="mb-6 bg-[#FDF6E3] p-4 rounded-lg border border-[#EAC696]">
+                    <div class="flex flex-wrap items-center justify-center gap-4">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-[#65451F]">عملة الحساب:</span>
+                            <span class="font-bold text-[#739072] text-xl">جنيه مصري (EGP)</span>
+                            <input type="hidden" id="currency_selector" value="EGP">
+                        </div>
+                        <button onclick="fetchGoldPrice()"
+                            class="bg-[#739072] text-white font-bold py-2 px-6 rounded-lg hover:bg-opacity-90 transition-all flex items-center gap-2">
+                            <span>تحديث الأسعار</span>
+                            <span id="price-loader"
+                                class="hidden animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+                        </button>
+                    </div>
+                    <div id="gold_price_display_container" class="mt-3 text-center hidden">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm font-semibold">سعر جرام الذهب (عيار 24):</p>
+                                <p class="text-xl font-bold text-[#739072] mt-1"><span
+                                        id="gold_price_display">...</span> <span id="currency_display">EGP</span></p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold">سعر جرام الفضة:</p>
+                                <p class="text-xl font-bold text-[#739072] mt-1"><span
+                                        id="silver_price_display">...</span> <span
+                                        id="currency_display_silver">EGP</span></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="money" class="tab-content rtl"><h3 class="text-2xl font-semibold mb-4 text-center">زكاة النقود والذهب والفضة</h3><div class="grid md:grid-cols-2 gap-6 items-start"><div><label for="money_type" class="block font-semibold mb-2">نوع المال:</label><select id="money_type" class="w-full p-2 border border-gray-300 rounded-lg mb-4" onchange="updateNisabInfo()"><option value="gold">الذهب (عيار 24)</option><option value="silver">الفضة</option><option value="cash">النقود (حسب نصاب الذهب)</option></select><label for="money_amount" class="block font-semibold mb-2">المقدار/القيمة:</label><input type="number" id="money_amount" placeholder="أدخل المقدار بالغرام أو القيمة النقدية" class="w-full p-2 border border-gray-300 rounded-lg"></div><div class="bg-[#FDF6E3] p-4 rounded-lg"><h4 class="font-bold text-lg mb-2">معلومات النصاب:</h4><p id="nisab_info" class="mb-2"><strong>نصاب الذهب:</strong> 85 غراماً من الذهب الخالص.</p><p class="text-sm">ملاحظة: تجب الزكاة إذا بلغ المال النصاب ومضى عليه عام هجري كامل. مقدار الزكاة هو 2.5% (ربع العشر).</p></div></div><div class="text-center mt-6"><button onclick="calculateMoneyZakat()" class="bg-[#739072] text-white font-bold py-2 px-8 rounded-lg hover:bg-opacity-90 transition-all">احسب</button></div><div id="money_result" class="mt-6 text-center text-xl font-bold"></div></div>
-                <div id="trade" class="tab-content hidden rtl"><h3 class="text-2xl font-semibold mb-4 text-center">زكاة عروض التجارة</h3><div class="grid md:grid-cols-2 gap-6 items-start"><div><label for="trade_value" class="block font-semibold mb-2">قيمة البضاعة المعدة للبيع (بسعر البيع الحالي):</label><input type="number" id="trade_value" placeholder="أدخل قيمة البضاعة" class="w-full p-2 border border-gray-300 rounded-lg mb-4"><label for="trade_cash" class="block font-semibold mb-2">السيولة النقدية الناتجة عن التجارة:</label><input type="number" id="trade_cash" placeholder="أدخل قيمة السيولة" class="w-full p-2 border border-gray-300 rounded-lg mb-4"><label for="trade_debt" class="block font-semibold mb-2">الديون التي لك على الآخرين (المرجو سدادها):</label><input type="number" id="trade_debt" placeholder="أدخل قيمة الديون" class="w-full p-2 border border-gray-300 rounded-lg"></div><div class="bg-[#FDF6E3] p-4 rounded-lg"><h4 class="font-bold text-lg mb-2">طريقة الحساب:</h4><p class="mb-2">تُجمع قيمة البضاعة مع السيولة النقدية والديون المرجوة. إذا بلغ المجموع نصاب الذهب (ما يعادل 85 غراماً) وحال عليه الحول، وجبت فيه الزكاة بنسبة 2.5%.</p><p><strong>سعر الذهب اليوم (تقريبي):</strong> <span id="gold_price_trade">ادخل سعر الجرام</span> <input type="number" id="gold_price_input_trade" placeholder="سعر جرام الذهب" class="w-full p-1 border border-gray-300 rounded-lg mt-1 text-sm"></p></div></div><div class="text-center mt-6"><button onclick="calculateTradeZakat()" class="bg-[#739072] text-white font-bold py-2 px-8 rounded-lg hover:bg-opacity-90 transition-all">احسب</button></div><div id="trade_result" class="mt-6 text-center text-xl font-bold"></div></div>
-                <div id="agriculture" class="tab-content hidden rtl"><h3 class="text-2xl font-semibold mb-4 text-center">زكاة الزروع والثمار</h3><div class="grid md:grid-cols-2 gap-6 items-start"><div><label for="crop_amount" class="block font-semibold mb-2">كمية المحصول (بالكيلوجرام):</label><input type="number" id="crop_amount" placeholder="أدخل كمية المحصول" class="w-full p-2 border border-gray-300 rounded-lg mb-4"><label for="irrigation_method" class="block font-semibold mb-2">طريقة الري:</label><select id="irrigation_method" class="w-full p-2 border border-gray-300 rounded-lg"><option value="natural">سقي بماء السماء أو الأنهار (بدون كلفة)</option><option value="artificial">سقي بالآلات (بكلفة)</option></select></div><div class="bg-[#FDF6E3] p-4 rounded-lg"><h4 class="font-bold text-lg mb-2">معلومات النصاب والمقدار:</h4><p class="mb-2"><strong>النصاب:</strong> 5 أوسق، أي ما يعادل 653 كيلوجراماً تقريباً. لا زكاة فيما دون ذلك.</p><p><strong>المقدار الواجب:</strong></p><ul class="list-disc list-inside"><li><strong>10% (العشر):</strong> إذا كان السقي بدون كلفة (بماء المطر).</li><li><strong>5% (نصف العشر):</strong> إذا كان السقي بكلفة (بالآلات).</li></ul></div></div><div class="text-center mt-6"><button onclick="calculateAgricultureZakat()" class="bg-[#739072] text-white font-bold py-2 px-8 rounded-lg hover:bg-opacity-90 transition-all">احسب</button></div><div id="agriculture_result" class="mt-6 text-center text-xl font-bold"></div></div>
+
+                <div class="mb-6 border-b-2 border-[#EAC696] flex justify-center flex-wrap">
+                    <button class="tab-button p-4 text-lg font-semibold border-b-4 border-transparent active"
+                        onclick="showTab('money')">النقود والذهب والفضة</button>
+                    <button class="tab-button p-4 text-lg font-semibold border-b-4 border-transparent"
+                        onclick="showTab('trade')">عروض التجارة</button>
+                    <button class="tab-button p-4 text-lg font-semibold border-b-4 border-transparent"
+                        onclick="showTab('agriculture')">الزروع والثمار</button>
+                </div>
+                <div id="money" class="tab-content rtl">
+                    <h3 class="text-2xl font-semibold mb-4 text-center">زكاة النقود والذهب والفضة</h3>
+                    <div class="grid md:grid-cols-2 gap-6 items-start">
+                        <div>
+                            <label for="money_type" class="block font-semibold mb-2">نوع المال:</label>
+                            <select id="money_type" class="w-full p-2 border border-gray-300 rounded-lg mb-4"
+                                onchange="updateNisabInfo()">
+                                <option value="gold">الذهب (عيار 24)</option>
+                                <option value="silver">الفضة</option>
+                                <option value="cash">النقود</option>
+                            </select>
+
+                            <div id="cash_gold_price_container" class="hidden mb-4">
+                                <label class="block font-semibold mb-2 text-[#739072]">اختر معيار النصاب:</label>
+                                <div class="flex gap-4 mb-3">
+                                    <label class="inline-flex items-center">
+                                        <input type="radio" name="nisab_standard" value="gold" checked
+                                            onchange="updateNisabInfo()" class="form-radio text-[#739072]">
+                                        <span class="mr-2">الذهب (85 جرام)</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="radio" name="nisab_standard" value="silver"
+                                            onchange="updateNisabInfo()" class="form-radio text-[#739072]">
+                                        <span class="mr-2">الفضة (595 جرام)</span>
+                                    </label>
+                                </div>
+                                <div id="gold_input_wrapper">
+                                    <label for="gold_price_input_money"
+                                        class="block font-semibold mb-1 text-sm text-gray-600">سعر جرام الذهب
+                                        (24):</label>
+                                    <input type="number" id="gold_price_input_money" placeholder="سعر جرام الذهب"
+                                        class="w-full p-2 border border-gray-300 rounded-lg text-sm bg-white"
+                                        oninput="updateNisabInfo()">
+                                </div>
+                                <div id="silver_input_wrapper" class="hidden">
+                                    <label for="silver_price_input_money"
+                                        class="block font-semibold mb-1 text-sm text-gray-600">سعر جرام الفضة:</label>
+                                    <input type="number" id="silver_price_input_money" placeholder="سعر جرام الفضة"
+                                        class="w-full p-2 border border-gray-300 rounded-lg text-sm bg-white"
+                                        oninput="updateNisabInfo()">
+                                </div>
+                            </div>
+
+                            <label for="money_amount" class="block font-semibold mb-2">المقدار/القيمة:</label>
+                            <input type="number" id="money_amount" placeholder="أدخل المقدار بالغرام أو القيمة النقدية"
+                                class="w-full p-2 border border-gray-300 rounded-lg">
+                        </div>
+                        <div class="bg-[#FDF6E3] p-4 rounded-lg">
+                            <h4 class="font-bold text-lg mb-2">معلومات النصاب:</h4>
+                            <p id="nisab_info" class="mb-2"><strong>نصاب الذهب:</strong> 85 غراماً من الذهب الخالص.</p>
+                            <p class="text-sm">ملاحظة: تجب الزكاة إذا بلغ المال النصاب ومضى عليه عام هجري كامل. مقدار
+                                الزكاة هو 2.5% (ربع العشر).</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-6">
+                        <button onclick="calculateMoneyZakat()"
+                            class="bg-[#739072] text-white font-bold py-2 px-8 rounded-lg hover:bg-opacity-90 transition-all">احسب</button>
+                    </div>
+                    <div id="money_result" class="mt-6 text-center text-xl font-bold"></div>
+                </div>
+                <div id="trade" class="tab-content hidden rtl">
+                    <h3 class="text-2xl font-semibold mb-4 text-center">زكاة عروض التجارة</h3>
+                    <div class="grid md:grid-cols-2 gap-6 items-start">
+                        <div>
+                            <label for="trade_value" class="block font-semibold mb-2">قيمة البضاعة المعدة للبيع (بسعر
+                                البيع الحالي):</label>
+                            <input type="number" id="trade_value" placeholder="أدخل قيمة البضاعة"
+                                class="w-full p-2 border border-gray-300 rounded-lg mb-4">
+                            <label for="trade_cash" class="block font-semibold mb-2">السيولة النقدية الناتجة عن
+                                التجارة:</label>
+                            <input type="number" id="trade_cash" placeholder="أدخل قيمة السيولة"
+                                class="w-full p-2 border border-gray-300 rounded-lg mb-4">
+                            <label for="trade_debt" class="block font-semibold mb-2">الديون التي لك على الآخرين (المرجو
+                                سدادها):</label>
+                            <input type="number" id="trade_debt" placeholder="أدخل قيمة الديون"
+                                class="w-full p-2 border border-gray-300 rounded-lg">
+                        </div>
+                        <div class="bg-[#FDF6E3] p-4 rounded-lg">
+                            <h4 class="font-bold text-lg mb-2">طريقة الحساب:</h4>
+                            <p class="mb-2">تُجمع قيمة البضاعة مع السيولة النقدية والديون المرجوة. إذا بلغ المجموع نصاب
+                                الذهب (ما يعادل 85 غراماً) وحال عليه الحول، وجبت فيه الزكاة بنسبة 2.5%.</p>
+                            <p class="mt-4"><strong>سعر الذهب اليوم (عيار 24):</strong></p>
+                            <input type="number" id="gold_price_input_trade"
+                                placeholder="سيتم جلبه تلقائياً أو أدخله يدوياً"
+                                class="w-full p-2 border border-gray-300 rounded-lg mt-1 text-sm bg-white">
+                        </div>
+                    </div>
+                    <div class="text-center mt-6">
+                        <button onclick="calculateTradeZakat()"
+                            class="bg-[#739072] text-white font-bold py-2 px-8 rounded-lg hover:bg-opacity-90 transition-all">احسب</button>
+                    </div>
+                    <div id="trade_result" class="mt-6 text-center text-xl font-bold"></div>
+                </div>
+                <div id="agriculture" class="tab-content hidden rtl">
+                    <h3 class="text-2xl font-semibold mb-4 text-center">زكاة الزروع والثمار</h3>
+                    <div class="grid md:grid-cols-2 gap-6 items-start">
+                        <div><label for="crop_amount" class="block font-semibold mb-2">كمية المحصول
+                                (بالكيلوجرام):</label><input type="number" id="crop_amount"
+                                placeholder="أدخل كمية المحصول"
+                                class="w-full p-2 border border-gray-300 rounded-lg mb-4"><label for="irrigation_method"
+                                class="block font-semibold mb-2">طريقة الري:</label><select id="irrigation_method"
+                                class="w-full p-2 border border-gray-300 rounded-lg">
+                                <option value="natural">سقي بماء السماء أو الأنهار (بدون كلفة)</option>
+                                <option value="artificial">سقي بالآلات (بكلفة)</option>
+                            </select></div>
+                        <div class="bg-[#FDF6E3] p-4 rounded-lg">
+                            <h4 class="font-bold text-lg mb-2">معلومات النصاب والمقدار:</h4>
+                            <p class="mb-2"><strong>النصاب:</strong> 5 أوسق، أي ما يعادل 653 كيلوجراماً تقريباً. لا زكاة
+                                فيما دون ذلك.</p>
+                            <p><strong>المقدار الواجب:</strong></p>
+                            <ul class="list-disc list-inside">
+                                <li><strong>10% (العشر):</strong> إذا كان السقي بدون كلفة (بماء المطر).</li>
+                                <li><strong>5% (نصف العشر):</strong> إذا كان السقي بكلفة (بالآلات).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center mt-6"><button onclick="calculateAgricultureZakat()"
+                            class="bg-[#739072] text-white font-bold py-2 px-8 rounded-lg hover:bg-opacity-90 transition-all">احسب</button>
+                    </div>
+                    <div id="agriculture_result" class="mt-6 text-center text-xl font-bold"></div>
+                </div>
             </div>
         </section>
 
         <!-- Recipients Section -->
-        <section id="recipients" class="py-12 bg-[#F5E8C7] rounded-xl p-8 my-8"><h2 class="text-3xl font-bold text-center mb-2 text-[#739072]">لمن تُعطى الزكاة؟ (مصارف الزكاة)</h2><p class="text-center max-w-2xl mx-auto mb-8">حدد القرآن الكريم ثمانية أصناف تُصرف إليهم الزكاة. استكشفهم عبر هذا المخطط التفاعلي.</p><div class="flex flex-col md:flex-row items-center gap-8"><div class="w-full md:w-1/2"><div class="chart-container"><canvas id="recipientsChart"></canvas></div></div><div id="recipient-details" class="w-full md:w-1/2 bg-[#FDF6E3] p-6 rounded-lg shadow-inner min-h-[300px]"><h3 id="recipient-title" class="text-2xl font-bold mb-4 text-[#739072]">اختر صنفاً من الدائرة</h3><p id="recipient-description">مرر الفأرة أو اضغط على أحد الأقسام في الدائرة لعرض تفاصيل الصنف المستحق للزكاة.</p></div></div></section>
+        <section id="recipients" class="py-12 bg-[#F5E8C7] rounded-xl p-8 my-8">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#739072]">لمن تُعطى الزكاة؟ (مصارف الزكاة)</h2>
+            <p class="text-center max-w-2xl mx-auto mb-8">حدد القرآن الكريم ثمانية أصناف تُصرف إليهم الزكاة. استكشفهم
+                عبر هذا المخطط التفاعلي.</p>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="w-full md:w-1/2">
+                    <div class="chart-container"><canvas id="recipientsChart"></canvas></div>
+                </div>
+                <div id="recipient-details"
+                    class="w-full md:w-1/2 bg-[#FDF6E3] p-6 rounded-lg shadow-inner min-h-[300px]">
+                    <h3 id="recipient-title" class="text-2xl font-bold mb-4 text-[#739072]">اختر صنفاً من الدائرة</h3>
+                    <p id="recipient-description">مرر الفأرة أو اضغط على أحد الأقسام في الدائرة لعرض تفاصيل الصنف
+                        المستحق للزكاة.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="py-12 my-8"><h2 class="text-3xl font-bold text-center mb-8 text-[#739072]">مسائل خاصة وأسئلة شائعة</h2><div class="max-w-3xl mx-auto space-y-4"><div class="accordion-item bg-white rounded-lg shadow-md border border-[#EAC696]"><button class="accordion-header w-full text-right p-4 font-semibold text-lg flex justify-between items-center"><span>زكاة الفطر</span><span class="transform transition-transform duration-300">▼</span></button><div class="accordion-content"><p class="p-4 border-t border-[#EAC696]">هي زكاة تجب بالفطر من رمضان، وهي طهرة للصائم من اللغو والرفث وطعمة للمساكين. تجب على كل مسلم يملك قوت يوم العيد وليلته فاضلاً عن حاجته الأصلية. مقدارها صاع من غالب قوت البلد (حوالي 2.5 - 3 كجم)، ويجوز إخراج قيمتها نقداً عند بعض الفقهاء تيسيراً على الفقير.</p></div></div><div class="accordion-item bg-white rounded-lg shadow-md border border-[#EAC696]"><button class="accordion-header w-full text-right p-4 font-semibold text-lg flex justify-between items-center"><span>زكاة حُليّ النساء</span><span class="transform transition-transform duration-300">▼</span></button><div class="accordion-content"><p class="p-4 border-t border-[#EAC696]">هناك خلاف بين الفقهاء في هذه المسألة. الجمهور (المالكية والشافعية والحنابلة) على أنه لا زكاة في حلي النساء المباح المعد للاستعمال الشخصي ما لم يبلغ حد الإسراف. بينما يرى الحنفية وجوب الزكاة فيه إذا بلغ النصاب وحال عليه الحول، وهو الأحوط والأبرأ للذمة.</p></div></div><div class="accordion-item bg-white rounded-lg shadow-md border border-[#EAC696]"><button class="accordion-header w-full text-right p-4 font-semibold text-lg flex justify-between items-center"><span>زكاة الرواتب والأجور</span><span class="transform transition-transform duration-300">▼</span></button><div class="accordion-content"><p class="p-4 border-t border-[#EAC696]">الراتب الشهري هو مال مستفاد. الطريقة الأيسر والأحوط لحساب زكاته هي أن يحدد المزكي يوماً في السنة (مثلاً الأول من رمضان) ويقوم بجرد كل ما يملكه من أموال نقدية في ذلك اليوم، سواء كانت من مدخرات الرواتب أو غيرها. إذا بلغ المجموع النصاب، يخرج 2.5% منه. هذه الطريقة تضمن عدم إغفال حولان الحول على المبالغ المختلفة وتسهل الحساب.</p></div></div></div></section>
-        
+        <section id="faq" class="py-12 my-8">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#739072]">مسائل خاصة وأسئلة شائعة</h2>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-[#EAC696]"><button
+                        class="accordion-header w-full text-right p-4 font-semibold text-lg flex justify-between items-center"><span>زكاة
+                            الفطر</span><span class="transform transition-transform duration-300">▼</span></button>
+                    <div class="accordion-content">
+                        <p class="p-4 border-t border-[#EAC696]">هي زكاة تجب بالفطر من رمضان، وهي طهرة للصائم من اللغو
+                            والرفث وطعمة للمساكين. تجب على كل مسلم يملك قوت يوم العيد وليلته فاضلاً عن حاجته الأصلية.
+                            مقدارها صاع من غالب قوت البلد (حوالي 2.5 - 3 كجم)، ويجوز إخراج قيمتها نقداً عند بعض الفقهاء
+                            تيسيراً على الفقير.</p>
+                    </div>
+                </div>
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-[#EAC696]"><button
+                        class="accordion-header w-full text-right p-4 font-semibold text-lg flex justify-between items-center"><span>زكاة
+                            حُليّ النساء</span><span
+                            class="transform transition-transform duration-300">▼</span></button>
+                    <div class="accordion-content">
+                        <p class="p-4 border-t border-[#EAC696]">هناك خلاف بين الفقهاء في هذه المسألة. الجمهور (المالكية
+                            والشافعية والحنابلة) على أنه لا زكاة في حلي النساء المباح المعد للاستعمال الشخصي ما لم يبلغ
+                            حد الإسراف. بينما يرى الحنفية وجوب الزكاة فيه إذا بلغ النصاب وحال عليه الحول، وهو الأحوط
+                            والأبرأ للذمة.</p>
+                    </div>
+                </div>
+                <div class="accordion-item bg-white rounded-lg shadow-md border border-[#EAC696]"><button
+                        class="accordion-header w-full text-right p-4 font-semibold text-lg flex justify-between items-center"><span>زكاة
+                            الرواتب والأجور</span><span
+                            class="transform transition-transform duration-300">▼</span></button>
+                    <div class="accordion-content">
+                        <p class="p-4 border-t border-[#EAC696]">الراتب الشهري هو مال مستفاد. الطريقة الأيسر والأحوط
+                            لحساب زكاته هي أن يحدد المزكي يوماً في السنة (مثلاً الأول من رمضان) ويقوم بجرد كل ما يملكه
+                            من أموال نقدية في ذلك اليوم، سواء كانت من مدخرات الرواتب أو غيرها. إذا بلغ المجموع النصاب،
+                            يخرج 2.5% منه. هذه الطريقة تضمن عدم إغفال حولان الحول على المبالغ المختلفة وتسهل الحساب.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Gemini Ask an Expert Section -->
         <section id="gemini-ask" class="py-12 my-8">
             <h2 class="text-3xl font-bold text-center mb-8 text-[#739072]">✨ اسأل خبيرًا (مدعوم بـ Gemini)</h2>
             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl max-w-4xl mx-auto border-2 border-[#EAC696]">
-                <p class="text-center mb-6">هل لديك سؤال محدد حول الزكاة يتعلق بحالتك الشخصية؟ اكتب سؤالك هنا وسيقوم نموذج Gemini بتقديم إجابة فقهية إرشادية.</p>
+                <p class="text-center mb-6">هل لديك سؤال محدد حول الزكاة يتعلق بحالتك الشخصية؟ اكتب سؤالك هنا وسيقوم
+                    نموذج Gemini بتقديم إجابة فقهية إرشادية.</p>
                 <div class="rtl">
-                    <textarea id="zakat-question" class="w-full p-3 border border-gray-300 rounded-lg mb-4" rows="4" placeholder="مثال: أملك محلاً تجارياً، كيف أحسب زكاته مع العلم أن عليّ ديوناً؟"></textarea>
+                    <textarea id="zakat-question" class="w-full p-3 border border-gray-300 rounded-lg mb-4" rows="4"
+                        placeholder="مثال: أملك محلاً تجارياً، كيف أحسب زكاته مع العلم أن عليّ ديوناً؟"></textarea>
                     <div class="text-center">
-                         <button id="ask-gemini-btn" onclick="askGemini()" class="bg-[#739072] text-white font-bold py-2 px-8 rounded-lg hover:bg-opacity-90 transition-all">
+                        <button id="ask-gemini-btn" onclick="askGemini()"
+                            class="bg-[#739072] text-white font-bold py-2 px-8 rounded-lg hover:bg-opacity-90 transition-all">
                             أرسل السؤال
                         </button>
                     </div>
@@ -180,18 +411,20 @@
                         <div id="gemini-loader" class="loader hidden"></div>
                         <div id="gemini-answer" class="bg-[#FDF6E3] p-4 rounded-lg whitespace-pre-wrap"></div>
                     </div>
-                     <p class="text-xs text-center mt-4 text-gray-500">
-                        إخلاء مسؤولية: هذه الإجابة تم إنشاؤها بواسطة الذكاء الاصطناعي للإرشاد العام، وينصح دائمًا باستشارة عالم دين مؤهل للمسائل الشخصية.
+                    <p class="text-xs text-center mt-4 text-gray-500">
+                        إخلاء مسؤولية: هذه الإجابة تم إنشاؤها بواسطة الذكاء الاصطناعي للإرشاد العام، وينصح دائمًا
+                        باستشارة عالم دين مؤهل للمسائل الشخصية.
                     </p>
                 </div>
             </div>
         </section>
 
     </main>
-    
+
     <footer class="bg-[#F5E8C7] text-center p-4 mt-12">
-        <p>تم تصميم هذا الدليل التفاعلي بناءً على محتوى كتاب "الفقه الواضح من الكتاب والسنة" للدكتور محمد بكر إسماعيل.</p>
-        <p>&copy;  دليل الزكاة التفاعلي.</p>
+        <p>تم تصميم هذا الدليل التفاعلي بناءً على محتوى كتاب "الفقه الواضح من الكتاب والسنة" للدكتور محمد بكر إسماعيل.
+        </p>
+        <p>&copy; دليل الزكاة التفاعلي.</p>
     </footer>
 
     <!-- Dua Modal -->
@@ -201,7 +434,8 @@
             <div id="dua-loader" class="loader hidden"></div>
             <p id="dua-text" class="text-lg"></p>
             <div class="text-left mt-6">
-                <button onclick="closeModal()" class="bg-gray-300 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-400">إغلاق</button>
+                <button onclick="closeModal()"
+                    class="bg-gray-300 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-400">إغلاق</button>
             </div>
         </div>
     </div>
@@ -237,25 +471,122 @@
             silver: 595,
         };
 
+        async function fetchGoldPrice() {
+            const currency = document.getElementById('currency_selector').value; // Always EGP
+            const loader = document.getElementById('price-loader');
+            const display = document.getElementById('gold_price_display');
+            const displaySilver = document.getElementById('silver_price_display');
+            const displayContainer = document.getElementById('gold_price_display_container');
+
+            const inputTrade = document.getElementById('gold_price_input_trade');
+            const inputMoneyGold = document.getElementById('gold_price_input_money');
+            const inputMoneySilver = document.getElementById('silver_price_input_money');
+
+            loader.classList.remove('hidden');
+            display.innerText = "...";
+            if (displaySilver) displaySilver.innerText = "...";
+
+            try {
+                // Using a free API CORS proxy if needed, but data-asg.goldprice.org seems clear
+                const response = await fetch(`https://data-asg.goldprice.org/dbXRates/${currency}`);
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+                // API returns price for 1 oz (approx 31.1035g)
+                // Example: {"items":[{"curr":"SAR","xauPrice":18625.135...}]}
+                if (data.items && data.items.length > 0) {
+                    const pricePerOzGold = data.items[0].xauPrice;
+                    const pricePerOzSilver = data.items[0].xagPrice;
+
+                    const pricePerGramGold = pricePerOzGold / 31.1034768;
+                    const pricePerGramSilver = pricePerOzSilver / 31.1034768;
+
+                    const formattedPriceGold = pricePerGramGold.toFixed(2);
+                    const formattedPriceSilver = pricePerGramSilver.toFixed(2);
+
+                    // Update global inputs
+                    display.innerText = formattedPriceGold;
+                    if (displaySilver) displaySilver.innerText = formattedPriceSilver;
+
+                    displayContainer.classList.remove('hidden');
+
+                    if (inputTrade) inputTrade.value = formattedPriceGold;
+                    if (inputMoneyGold) inputMoneyGold.value = formattedPriceGold;
+                    if (inputMoneySilver) inputMoneySilver.value = formattedPriceSilver;
+
+                    // Trigger Nisab update if on money tab
+                    updateNisabInfo();
+                } else {
+                    throw new Error('Invalid data format');
+                }
+            } catch (error) {
+                console.error("Error fetching prices:", error);
+                alert("تعذر جلب الأسعار تلقائياً. يرجى التحقق من الإنترنت أو إدخال السعر يدوياً.");
+            } finally {
+                loader.classList.add('hidden');
+            }
+        }
+
         function updateNisabInfo() {
             const moneyType = document.getElementById('money_type').value;
             const nisabInfo = document.getElementById('nisab_info');
             const amountInput = document.getElementById('money_amount');
+            const goldPriceContainer = document.getElementById('cash_gold_price_container');
+
+            // Hide by default
+            goldPriceContainer.classList.add('hidden');
+
             if (moneyType === 'gold') {
                 nisabInfo.innerHTML = `<strong>نصاب الذهب:</strong> ${nisab.gold} غراماً من الذهب الخالص.`;
                 amountInput.placeholder = "أدخل المقدار بالغرام";
             } else if (moneyType === 'silver') {
                 nisabInfo.innerHTML = `<strong>نصاب الفضة:</strong> ${nisab.silver} غراماً من الفضة الخالصة.`;
-                 amountInput.placeholder = "أدخل المقدار بالغرام";
-            } else {
-                nisabInfo.innerHTML = `<strong>نصاب النقود:</strong> ما يعادل قيمة ${nisab.gold} غراماً من الذهب.`;
-                 amountInput.placeholder = "أدخل القيمة النقدية";
+                amountInput.placeholder = "أدخل المقدار بالغرام";
+            } else { // Cash
+                goldPriceContainer.classList.remove('hidden');
+
+                // Determine selected standard
+                let standard = 'gold';
+                const checkedRadio = document.querySelector('input[name="nisab_standard"]:checked');
+                if (checkedRadio) {
+                    standard = checkedRadio.value;
+                }
+                const currency = "EGP"; // Fixed
+
+                const goldWrapper = document.getElementById('gold_input_wrapper');
+                const silverWrapper = document.getElementById('silver_input_wrapper');
+
+                if (standard === 'gold') {
+                    if (goldWrapper) goldWrapper.classList.remove('hidden');
+                    if (silverWrapper) silverWrapper.classList.add('hidden');
+
+                    const currentPrice = parseFloat(document.getElementById('gold_price_input_money').value);
+                    if (!isNaN(currentPrice) && currentPrice > 0) {
+                        const nisabValue = (85 * currentPrice).toFixed(2);
+                        nisabInfo.innerHTML = `<strong>نصاب النقود (بالذهب):</strong> ما يعادل ${nisabValue} ${currency} (قيمة 85 غم ذهب).`;
+                    } else {
+                        nisabInfo.innerHTML = `<strong>نصاب النقود (بالذهب):</strong> يرجى تحديث الأسعار.`;
+                    }
+                } else {
+                    if (goldWrapper) goldWrapper.classList.add('hidden');
+                    if (silverWrapper) silverWrapper.classList.remove('hidden');
+
+                    const currentPrice = parseFloat(document.getElementById('silver_price_input_money').value);
+                    if (!isNaN(currentPrice) && currentPrice > 0) {
+                        const nisabValue = (595 * currentPrice).toFixed(2);
+                        nisabInfo.innerHTML = `<strong>نصاب النقود (بالفضة):</strong> ما يعادل ${nisabValue} ${currency} (قيمة 595 غم فضة).`;
+                    } else {
+                        nisabInfo.innerHTML = `<strong>نصاب النقود (بالفضة):</strong> يرجى تحديث الأسعار.`;
+                    }
+                }
+                amountInput.placeholder = "أدخل القيمة النقدية";
             }
         }
-        
+
+
         function showDuaButton(resultDiv, context, amount) {
             const existingBtn = resultDiv.querySelector('.dua-btn');
-            if(existingBtn) existingBtn.remove();
+            if (existingBtn) existingBtn.remove();
 
             const duaButton = document.createElement('button');
             duaButton.innerHTML = "✨ اقتراح دعاء مخصص";
@@ -269,39 +600,70 @@
             const moneyType = document.getElementById('money_type').value;
             const amount = parseFloat(document.getElementById('money_amount').value);
             const resultDiv = document.getElementById('money_result');
+            const currency = "EGP"; // Fixed
 
             if (isNaN(amount) || amount <= 0) {
                 resultDiv.innerHTML = `<span class="text-red-600">الرجاء إدخال مبلغ صحيح.</span>`;
                 return;
             }
-            
+
             let isNisabReached = false;
             let zakatAmount = 0;
             let currentNisab = 0;
-            
+            let unit = '';
+
             if (moneyType === 'gold') {
                 currentNisab = nisab.gold;
+                unit = 'غرام';
                 if (amount >= currentNisab) {
                     isNisabReached = true;
                     zakatAmount = amount * 0.025;
                 }
             } else if (moneyType === 'silver') {
                 currentNisab = nisab.silver;
+                unit = 'غرام';
                 if (amount >= currentNisab) {
                     isNisabReached = true;
                     zakatAmount = amount * 0.025;
                 }
             } else if (moneyType === 'cash') {
-                 resultDiv.innerHTML = `<span class="text-red-600">لحساب زكاة النقد، يرجى استخدام حاسبة عروض التجارة وإدخال سعر الذهب لحساب النصاب بدقة.</span>`;
-                 return;
+                // For cash, check standard
+                let standard = 'gold';
+                const checkedRadio = document.querySelector('input[name="nisab_standard"]:checked');
+                if (checkedRadio) {
+                    standard = checkedRadio.value;
+                }
+
+                let nisabValue = 0;
+                let price = 0;
+
+                if (standard === 'gold') {
+                    price = parseFloat(document.getElementById('gold_price_input_money').value);
+                    nisabValue = 85 * price;
+                } else {
+                    price = parseFloat(document.getElementById('silver_price_input_money').value);
+                    nisabValue = 595 * price;
+                }
+
+                if (isNaN(price) || price <= 0) {
+                    resultDiv.innerHTML = `<span class="text-red-600">الرجاء تحديث الأسعار لحساب النصاب.</span>`;
+                    return;
+                }
+
+                currentNisab = nisabValue;
+                unit = currency;
+
+                if (amount >= nisabValue) {
+                    isNisabReached = true;
+                    zakatAmount = amount * 0.025;
+                }
             }
 
             if (isNisabReached) {
-                const unit = moneyType === 'cash' ? 'وحدة نقدية' : 'غرام';
                 resultDiv.innerHTML = `المال بلغ النصاب. مقدار الزكاة الواجبة هو: <span class="text-green-700">${zakatAmount.toFixed(2)}</span> ${unit}.`;
-                showDuaButton(resultDiv, 'مالي', zakatAmount);
+                showDuaButton(resultDiv, 'مالي', zakatAmount + ' ' + unit);
             } else {
-                resultDiv.innerHTML = `<span class="text-blue-600">المال لم يبلغ النصاب (${currentNisab} غرام). لا تجب فيه الزكاة.</span>`;
+                resultDiv.innerHTML = `<span class="text-blue-600">المال لم يبلغ النصاب (${currentNisab.toFixed(2)} ${unit}). لا تجب فيه الزكاة.</span>`;
             }
         }
 
@@ -313,27 +675,27 @@
             const resultDiv = document.getElementById('trade_result');
 
             if (isNaN(goldPrice) || goldPrice <= 0) {
-                 resultDiv.innerHTML = `<span class="text-red-600">الرجاء إدخال سعر جرام الذهب لحساب النصاب.</span>`;
+                resultDiv.innerHTML = `<span class="text-red-600">الرجاء إدخال سعر جرام الذهب لحساب النصاب.</span>`;
                 return;
             }
 
             const totalValue = tradeValue + tradeCash + tradeDebt;
             const nisabValue = nisab.gold * goldPrice;
-            
+
             if (totalValue >= nisabValue) {
                 const zakatAmount = totalValue * 0.025;
                 resultDiv.innerHTML = `مجموع المال (${totalValue.toFixed(2)}) بلغ النصاب (${nisabValue.toFixed(2)}).<br> مقدار الزكاة الواجبة هو: <span class="text-green-700">${zakatAmount.toFixed(2)}</span> وحدة نقدية.`;
-                 showDuaButton(resultDiv, 'تجارتي', zakatAmount);
+                showDuaButton(resultDiv, 'تجارتي', zakatAmount);
             } else {
-                 resultDiv.innerHTML = `<span class="text-blue-600">مجموع المال (${totalValue.toFixed(2)}) لم يبلغ النصاب (${nisabValue.toFixed(2)}). لا تجب فيه الزكاة.</span>`;
+                resultDiv.innerHTML = `<span class="text-blue-600">مجموع المال (${totalValue.toFixed(2)}) لم يبلغ النصاب (${nisabValue.toFixed(2)}). لا تجب فيه الزكاة.</span>`;
             }
         }
-        
+
         function calculateAgricultureZakat() {
             const cropAmount = parseFloat(document.getElementById('crop_amount').value);
             const irrigation = document.getElementById('irrigation_method').value;
             const resultDiv = document.getElementById('agriculture_result');
-            const nisabAgriculture = 653; 
+            const nisabAgriculture = 653;
 
             if (isNaN(cropAmount) || cropAmount <= 0) {
                 resultDiv.innerHTML = `<span class="text-red-600">الرجاء إدخال كمية صحيحة للمحصول.</span>`;
@@ -344,7 +706,7 @@
                 const rate = irrigation === 'natural' ? 0.10 : 0.05;
                 const zakatAmount = cropAmount * rate;
                 resultDiv.innerHTML = `المحصول بلغ النصاب. مقدار الزكاة الواجبة هو: <span class="text-green-700">${zakatAmount.toFixed(2)}</span> كيلوجرام.`;
-                 showDuaButton(resultDiv, 'زرعي وثماري', zakatAmount);
+                showDuaButton(resultDiv, 'زرعي وثماري', zakatAmount);
             } else {
                 resultDiv.innerHTML = `<span class="text-blue-600">المحصول لم يبلغ النصاب (${nisabAgriculture} كجم). لا تجب فيه الزكاة.</span>`;
             }
@@ -352,13 +714,13 @@
 
 
         // Chart.js for Recipients
-        const recipientData = { labels: ['الفقراء', 'المساكين', 'العاملون عليها', 'المؤلفة قلوبهم', 'في الرقاب', 'الغارمون', 'في سبيل الله', 'ابن السبيل'], descriptions: { 'الفقراء': 'وهم الذين لا يجدون شيئاً من الكفاية أو يجدون أقل من نصفها. حاجتهم شديدة.', 'المساكين': 'وهم الذين يجدون نصف الكفاية أو أكثرها ولكن لا يجدون تمامها. حالهم أحسن من الفقراء ولكنهم محتاجون.', 'العاملون عليها': 'وهم الذين يعينهم الحاكم لجمع الزكاة وتوزيعها، ويُعطون أجرتهم منها.', 'المؤلفة قلوبهم': 'وهم السادة المطاعون في أقوامهم ممن يرجى إسلامهم، أو كف شرهم عن المسلمين، أو يرجى بعطائهم قوة إيمانهم.', 'في الرقاب': 'ويشمل تحرير الأرقاء المسلمين من العبودية، ومساعدة الأسرى المسلمين على التحرر.', 'الغارمون': 'وهم المدينون الذين تحملوا ديناً في غير معصية وعجزوا عن سداده.', 'في سبيل الله': 'والمقصود به عند جمهور الفقهاء الجهاد في سبيل الله وما يتعلق به من تجهيز الجيوش. ووسعه بعض المعاصرين ليشمل كل أعمال الخير العامة.', 'ابن السبيل': 'وهو المسافر الذي انقطع عن بلده ونفدت نفقته، فيُعطى ما يوصله إلى بلده وإن كان غنياً فيه.'}, datasets: [{ data: [12.5, 12.5, 12.5, 12.5, 12.5, 12.5, 12.5, 12.5], backgroundColor: ['#A0937D', '#B6A48D', '#CBAF87', '#DEC9A4', '#E7D9B9', '#BFB29E', '#AD9F8A', '#9B8B78'], hoverBackgroundColor: ['#867A68', '#9C8C77', '#B09670', '#C4B08E', '#D0BF9A', '#A59987', '#948775', '#827464'], borderColor: '#FDF6E3', borderWidth: 3, hoverOffset: 15 }] };
+        const recipientData = { labels: ['الفقراء', 'المساكين', 'العاملون عليها', 'المؤلفة قلوبهم', 'في الرقاب', 'الغارمون', 'في سبيل الله', 'ابن السبيل'], descriptions: { 'الفقراء': 'وهم الذين لا يجدون شيئاً من الكفاية أو يجدون أقل من نصفها. حاجتهم شديدة.', 'المساكين': 'وهم الذين يجدون نصف الكفاية أو أكثرها ولكن لا يجدون تمامها. حالهم أحسن من الفقراء ولكنهم محتاجون.', 'العاملون عليها': 'وهم الذين يعينهم الحاكم لجمع الزكاة وتوزيعها، ويُعطون أجرتهم منها.', 'المؤلفة قلوبهم': 'وهم السادة المطاعون في أقوامهم ممن يرجى إسلامهم، أو كف شرهم عن المسلمين، أو يرجى بعطائهم قوة إيمانهم.', 'في الرقاب': 'ويشمل تحرير الأرقاء المسلمين من العبودية، ومساعدة الأسرى المسلمين على التحرر.', 'الغارمون': 'وهم المدينون الذين تحملوا ديناً في غير معصية وعجزوا عن سداده.', 'في سبيل الله': 'والمقصود به عند جمهور الفقهاء الجهاد في سبيل الله وما يتعلق به من تجهيز الجيوش. ووسعه بعض المعاصرين ليشمل كل أعمال الخير العامة.', 'ابن السبيل': 'وهو المسافر الذي انقطع عن بلده ونفدت نفقته، فيُعطى ما يوصله إلى بلده وإن كان غنياً فيه.' }, datasets: [{ data: [12.5, 12.5, 12.5, 12.5, 12.5, 12.5, 12.5, 12.5], backgroundColor: ['#A0937D', '#B6A48D', '#CBAF87', '#DEC9A4', '#E7D9B9', '#BFB29E', '#AD9F8A', '#9B8B78'], hoverBackgroundColor: ['#867A68', '#9C8C77', '#B09670', '#C4B08E', '#D0BF9A', '#A59987', '#948775', '#827464'], borderColor: '#FDF6E3', borderWidth: 3, hoverOffset: 15 }] };
         const ctx = document.getElementById('recipientsChart').getContext('2d');
-        const recipientsChart = new Chart(ctx, { type: 'doughnut', data: recipientData, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { family: "'Cairo', sans-serif", size: 14 }, color: '#65451F', boxWidth: 20, padding: 20 }}, tooltip: { enabled: true, titleFont: { family: "'Cairo', sans-serif" }, bodyFont: { family: "'Cairo', sans-serif" }}}, onClick: (event, elements) => { if (elements.length > 0) { const i = elements[0].index; const title = recipientData.labels[i]; const description = recipientData.descriptions[title]; document.getElementById('recipient-title').innerText = title; document.getElementById('recipient-description').innerText = description; }}, onHover: (event, elements) => { if (elements.length > 0) { const i = elements[0].index; const title = recipientData.labels[i]; const description = recipientData.descriptions[title]; document.getElementById('recipient-title').innerText = title; document.getElementById('recipient-description').innerText = description; event.native.target.style.cursor = 'pointer'; } else { event.native.target.style.cursor = 'default'; }}} });
-        
+        const recipientsChart = new Chart(ctx, { type: 'doughnut', data: recipientData, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { family: "'Cairo', sans-serif", size: 14 }, color: '#65451F', boxWidth: 20, padding: 20 } }, tooltip: { enabled: true, titleFont: { family: "'Cairo', sans-serif" }, bodyFont: { family: "'Cairo', sans-serif" } } }, onClick: (event, elements) => { if (elements.length > 0) { const i = elements[0].index; const title = recipientData.labels[i]; const description = recipientData.descriptions[title]; document.getElementById('recipient-title').innerText = title; document.getElementById('recipient-description').innerText = description; } }, onHover: (event, elements) => { if (elements.length > 0) { const i = elements[0].index; const title = recipientData.labels[i]; const description = recipientData.descriptions[title]; document.getElementById('recipient-title').innerText = title; document.getElementById('recipient-description').innerText = description; event.native.target.style.cursor = 'pointer'; } else { event.native.target.style.cursor = 'default'; } } } });
+
         // Accordion functionality
         const accordionHeaders = document.querySelectorAll('.accordion-header');
-        accordionHeaders.forEach(header => { header.addEventListener('click', () => { const content = header.nextElementSibling; const arrow = header.querySelector('span:last-child'); document.querySelectorAll('.accordion-content').forEach(c => { if (c !== content) { c.style.maxHeight = null; c.previousElementSibling.querySelector('span:last-child').classList.remove('rotate-180'); }}); if (content.style.maxHeight) { content.style.maxHeight = null; arrow.classList.remove('rotate-180'); } else { content.style.maxHeight = content.scrollHeight + "px"; arrow.classList.add('rotate-180'); }}); });
+        accordionHeaders.forEach(header => { header.addEventListener('click', () => { const content = header.nextElementSibling; const arrow = header.querySelector('span:last-child'); document.querySelectorAll('.accordion-content').forEach(c => { if (c !== content) { c.style.maxHeight = null; c.previousElementSibling.querySelector('span:last-child').classList.remove('rotate-180'); } }); if (content.style.maxHeight) { content.style.maxHeight = null; arrow.classList.remove('rotate-180'); } else { content.style.maxHeight = content.scrollHeight + "px"; arrow.classList.add('rotate-180'); } }); });
 
         // Gemini API functionality
         const askButton = document.getElementById('ask-gemini-btn');
@@ -378,7 +740,7 @@
             askButton.disabled = true;
 
             const prompt = `بصفتك خبيرًا في الفقه الإسلامي، وبالاستناد إلى محتوى كتاب "الفقه الواضح"، أجب عن السؤال التالي المتعلق بالزكاة إجابة واضحة ومفصلة ومبنية على الأدلة من القرآن والسنة مع مراعاة آراء المذاهب الأربعة قدر الإمكان. السؤال هو: ${question}`;
-            
+
             const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
             const payload = { contents: chatHistory };
             const apiKey = "";
@@ -391,7 +753,7 @@
                     body: JSON.stringify(payload)
                 });
                 const result = await response.json();
-                
+
                 if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
                     const text = result.candidates[0].content.parts[0].text;
                     answerDiv.innerText = text;
@@ -424,28 +786,28 @@
             openModal();
             duaLoader.classList.remove('hidden');
             duaText.innerText = "";
-            
+
             const prompt = `اكتب دعاءً قصيراً ومؤثراً باللغة العربية لشخص أخرج زكاة ${context} بمقدار ${amount}. يجب أن يطلب الدعاء من الله قبول الزكاة والبركة في المال والأهل والرزق.`;
 
             const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
             const payload = { contents: chatHistory };
             const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            
+
             try {
-                 const response = await fetch(apiUrl, {
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
                 const result = await response.json();
-                 if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
                     const text = result.candidates[0].content.parts[0].text;
                     duaText.innerText = text;
                 } else {
                     duaText.innerText = "اللهم تقبل منا إنك أنت السميع العليم.";
                 }
-            } catch(error) {
+            } catch (error) {
                 console.error("Error calling Gemini API for Dua:", error);
                 duaText.innerText = "اللهم تقبل منا صالح الأعمال وبارك لنا في أرزاقنا.";
             } finally {
@@ -456,6 +818,11 @@
 
         // Initial call to set correct nisab info
         updateNisabInfo();
+
+        // Auto-fetch price on load if possible, or just user initiated. 
+        // Let's safe-fetch on load to impress user.
+        fetchGoldPrice();
     </script>
 </body>
+
 </html>
