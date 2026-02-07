@@ -13,6 +13,7 @@ This project provides an easy-to-use interface for calculating Zakah based on va
 - **Zakat Types**: Supports calculations for Gold, Silver, Cash, Trade Assets, and Agriculture.
 - **AI Integration**: Ask questions about Zakat rulings powered by Gemini.
 
-## Usage
+## Deployment
 
-Simply open the index.html file in your browser to use the calculator.
+This project uses [GitHub Actions](https://github.com/features/actions) to automatically build and deploy to [GitHub Pages](https://pages.github.com/).
+Any push to the `main` branch will trigger a deployment.
