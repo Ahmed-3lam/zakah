@@ -255,8 +255,8 @@
                             </div>
 
                             <label for="money_amount" class="block font-semibold mb-2">المقدار/القيمة:</label>
-                            <input type="number" id="money_amount" placeholder="أدخل المقدار بالغرام أو القيمة النقدية"
-                                class="w-full p-2 border border-gray-300 rounded-lg">
+                            <input type="text" id="money_amount" placeholder="أدخل المقدار بالغرام أو القيمة النقدية"
+                                class="w-full p-2 border border-gray-300 rounded-lg" oninput="formatInput(this)">
                         </div>
                         <div class="bg-[#FDF6E3] p-4 rounded-lg">
                             <h4 class="font-bold text-lg mb-2">معلومات النصاب:</h4>
@@ -277,16 +277,16 @@
                         <div>
                             <label for="trade_value" class="block font-semibold mb-2">قيمة البضاعة المعدة للبيع (بسعر
                                 البيع الحالي):</label>
-                            <input type="number" id="trade_value" placeholder="أدخل قيمة البضاعة"
-                                class="w-full p-2 border border-gray-300 rounded-lg mb-4">
+                            <input type="text" id="trade_value" placeholder="أدخل قيمة البضاعة"
+                                class="w-full p-2 border border-gray-300 rounded-lg mb-4" oninput="formatInput(this)">
                             <label for="trade_cash" class="block font-semibold mb-2">السيولة النقدية الناتجة عن
                                 التجارة:</label>
-                            <input type="number" id="trade_cash" placeholder="أدخل قيمة السيولة"
-                                class="w-full p-2 border border-gray-300 rounded-lg mb-4">
+                            <input type="text" id="trade_cash" placeholder="أدخل قيمة السيولة"
+                                class="w-full p-2 border border-gray-300 rounded-lg mb-4" oninput="formatInput(this)">
                             <label for="trade_debt" class="block font-semibold mb-2">الديون التي لك على الآخرين (المرجو
                                 سدادها):</label>
-                            <input type="number" id="trade_debt" placeholder="أدخل قيمة الديون"
-                                class="w-full p-2 border border-gray-300 rounded-lg">
+                            <input type="text" id="trade_debt" placeholder="أدخل قيمة الديون"
+                                class="w-full p-2 border border-gray-300 rounded-lg" oninput="formatInput(this)">
                         </div>
                         <div class="bg-[#FDF6E3] p-4 rounded-lg">
                             <h4 class="font-bold text-lg mb-2">طريقة الحساب:</h4>
@@ -475,6 +475,29 @@
             return parseFloat(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
+        function formatInput(input) {
+            // Remove existing commas to get raw number
+            let value = input.value.replace(/,/g, '');
+            if (!value) return;
+
+            // Allow only numbers and one decimal point
+            if (isNaN(value)) {
+                value = value.replace(/[^\d.]/g, '');
+            }
+
+            // Format with commas
+            const parts = value.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            // Reassemble
+            input.value = parts.join('.');
+        }
+
+        function getRawValue(id) {
+            const val = document.getElementById(id).value.replace(/,/g, '');
+            return parseFloat(val);
+        }
+
         async function fetchGoldPrice() {
             const currency = document.getElementById('currency_selector').value; // Always EGP
             const loader = document.getElementById('price-loader');
@@ -602,7 +625,7 @@
         // Zakat Calculation Logic
         function calculateMoneyZakat() {
             const moneyType = document.getElementById('money_type').value;
-            const amount = parseFloat(document.getElementById('money_amount').value);
+            const amount = getRawValue('money_amount');
             const resultDiv = document.getElementById('money_result');
             const currency = "EGP"; // Fixed
 
@@ -672,9 +695,9 @@
         }
 
         function calculateTradeZakat() {
-            const tradeValue = parseFloat(document.getElementById('trade_value').value) || 0;
-            const tradeCash = parseFloat(document.getElementById('trade_cash').value) || 0;
-            const tradeDebt = parseFloat(document.getElementById('trade_debt').value) || 0;
+            const tradeValue = getRawValue('trade_value') || 0;
+            const tradeCash = getRawValue('trade_cash') || 0;
+            const tradeDebt = getRawValue('trade_debt') || 0;
             const goldPrice = parseFloat(document.getElementById('gold_price_input_trade').value);
             const resultDiv = document.getElementById('trade_result');
 
