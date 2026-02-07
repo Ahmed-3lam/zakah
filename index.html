@@ -471,6 +471,10 @@
             silver: 595,
         };
 
+        function formatNumber(num) {
+            return parseFloat(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
         async function fetchGoldPrice() {
             const currency = document.getElementById('currency_selector').value; // Always EGP
             const loader = document.getElementById('price-loader');
@@ -505,8 +509,8 @@
                     const formattedPriceSilver = pricePerGramSilver.toFixed(2);
 
                     // Update global inputs
-                    display.innerText = formattedPriceGold;
-                    if (displaySilver) displaySilver.innerText = formattedPriceSilver;
+                    display.innerText = formatNumber(pricePerGramGold);
+                    if (displaySilver) displaySilver.innerText = formatNumber(pricePerGramSilver);
 
                     displayContainer.classList.remove('hidden');
 
@@ -562,8 +566,8 @@
 
                     const currentPrice = parseFloat(document.getElementById('gold_price_input_money').value);
                     if (!isNaN(currentPrice) && currentPrice > 0) {
-                        const nisabValue = (85 * currentPrice).toFixed(2);
-                        nisabInfo.innerHTML = `<strong>نصاب النقود (بالذهب):</strong> ما يعادل ${nisabValue} ${currency} (قيمة 85 غم ذهب).`;
+                        const nisabValue = 85 * currentPrice;
+                        nisabInfo.innerHTML = `<strong>نصاب النقود (بالذهب):</strong> ما يعادل ${formatNumber(nisabValue)} ${currency} (قيمة 85 غم ذهب).`;
                     } else {
                         nisabInfo.innerHTML = `<strong>نصاب النقود (بالذهب):</strong> يرجى تحديث الأسعار.`;
                     }
@@ -573,8 +577,8 @@
 
                     const currentPrice = parseFloat(document.getElementById('silver_price_input_money').value);
                     if (!isNaN(currentPrice) && currentPrice > 0) {
-                        const nisabValue = (595 * currentPrice).toFixed(2);
-                        nisabInfo.innerHTML = `<strong>نصاب النقود (بالفضة):</strong> ما يعادل ${nisabValue} ${currency} (قيمة 595 غم فضة).`;
+                        const nisabValue = 595 * currentPrice;
+                        nisabInfo.innerHTML = `<strong>نصاب النقود (بالفضة):</strong> ما يعادل ${formatNumber(nisabValue)} ${currency} (قيمة 595 غم فضة).`;
                     } else {
                         nisabInfo.innerHTML = `<strong>نصاب النقود (بالفضة):</strong> يرجى تحديث الأسعار.`;
                     }
@@ -660,10 +664,10 @@
             }
 
             if (isNisabReached) {
-                resultDiv.innerHTML = `المال بلغ النصاب. مقدار الزكاة الواجبة هو: <span class="text-green-700">${zakatAmount.toFixed(2)}</span> ${unit}.`;
-                showDuaButton(resultDiv, 'مالي', zakatAmount + ' ' + unit);
+                resultDiv.innerHTML = `المال بلغ النصاب. مقدار الزكاة الواجبة هو: <span class="text-green-700">${formatNumber(zakatAmount)}</span> ${unit}.`;
+                showDuaButton(resultDiv, 'مالي', formatNumber(zakatAmount) + ' ' + unit);
             } else {
-                resultDiv.innerHTML = `<span class="text-blue-600">المال لم يبلغ النصاب (${currentNisab.toFixed(2)} ${unit}). لا تجب فيه الزكاة.</span>`;
+                resultDiv.innerHTML = `<span class="text-blue-600">المال لم يبلغ النصاب (${formatNumber(currentNisab)} ${unit}). لا تجب فيه الزكاة.</span>`;
             }
         }
 
@@ -684,10 +688,10 @@
 
             if (totalValue >= nisabValue) {
                 const zakatAmount = totalValue * 0.025;
-                resultDiv.innerHTML = `مجموع المال (${totalValue.toFixed(2)}) بلغ النصاب (${nisabValue.toFixed(2)}).<br> مقدار الزكاة الواجبة هو: <span class="text-green-700">${zakatAmount.toFixed(2)}</span> وحدة نقدية.`;
-                showDuaButton(resultDiv, 'تجارتي', zakatAmount);
+                resultDiv.innerHTML = `مجموع المال (${formatNumber(totalValue)}) بلغ النصاب (${formatNumber(nisabValue)}).<br> مقدار الزكاة الواجبة هو: <span class="text-green-700">${formatNumber(zakatAmount)}</span> وحدة نقدية.`;
+                showDuaButton(resultDiv, 'تجارتي', formatNumber(zakatAmount));
             } else {
-                resultDiv.innerHTML = `<span class="text-blue-600">مجموع المال (${totalValue.toFixed(2)}) لم يبلغ النصاب (${nisabValue.toFixed(2)}). لا تجب فيه الزكاة.</span>`;
+                resultDiv.innerHTML = `<span class="text-blue-600">مجموع المال (${formatNumber(totalValue)}) لم يبلغ النصاب (${formatNumber(nisabValue)}). لا تجب فيه الزكاة.</span>`;
             }
         }
 
@@ -705,8 +709,8 @@
             if (cropAmount >= nisabAgriculture) {
                 const rate = irrigation === 'natural' ? 0.10 : 0.05;
                 const zakatAmount = cropAmount * rate;
-                resultDiv.innerHTML = `المحصول بلغ النصاب. مقدار الزكاة الواجبة هو: <span class="text-green-700">${zakatAmount.toFixed(2)}</span> كيلوجرام.`;
-                showDuaButton(resultDiv, 'زرعي وثماري', zakatAmount);
+                resultDiv.innerHTML = `المحصول بلغ النصاب. مقدار الزكاة الواجبة هو: <span class="text-green-700">${formatNumber(zakatAmount)}</span> كيلوجرام.`;
+                showDuaButton(resultDiv, 'زرعي وثماري', formatNumber(zakatAmount));
             } else {
                 resultDiv.innerHTML = `<span class="text-blue-600">المحصول لم يبلغ النصاب (${nisabAgriculture} كجم). لا تجب فيه الزكاة.</span>`;
             }
