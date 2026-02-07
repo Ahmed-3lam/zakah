@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل الزكاة التفاعلي (معزز بـ Gemini)</title>
+    <title>دليل الزكاة التفاعلي</title>
     <!-- Chosen Palette: Calm Harmony -->
     <!-- Application Structure Plan: A thematic, dashboard-style single-page application. The structure is designed for an exploratory user experience, guiding the user from foundational concepts to practical application and detailed inquiries. It starts with a hero section, followed by 'Core Concepts' using interactive cards, a central 'Zakat Calculator' for practical engagement, a 'Recipients of Zakat' section with a Chart.js visualization, an 'FAQ' section with an accordion for specific rulings, and a new Gemini-powered "Ask an Expert" section. This structure prioritizes user engagement and understanding. -->
     <!-- Visualization & Content Choices: 1. Core Concepts: Interactive HTML cards (Goal: Inform). 2. Zakat Calculator: Dynamic HTML form with JS (Goal: Apply). 3. Recipients: Chart.js Donut chart (Goal: Visualize). 4. FAQ: HTML/JS accordion (Goal: Organize). 5. New: Ask an Expert (اسأل خبيرًا) - A form that calls the Gemini API to answer user-specific questions, providing deep, personalized Fiqh guidance. 6. New: Suggest a Dua (اقتراح دعاء) - A button appears after calculation to call Gemini for a personalized prayer. -->
@@ -130,7 +130,7 @@
             <h2 class="text-4xl font-bold text-[#739072] mb-4">الزكاة: الركن الثالث من أركان الإسلام</h2>
             <p class="text-lg max-w-3xl mx-auto">
                 مرحباً بك في الدليل التفاعلي الشامل لأحكام الزكاة. يهدف هذا الدليل إلى تبسيط المفاهيم المعقدة وتقديم
-                الأدوات اللازمة لحساب زكاتك وفهم مصارفها، والآن معزز بقدرات Gemini للرد على استفساراتكم الفقهية.
+                الأدوات اللازمة لحساب زكاتك وفهم مصارفها.
             </p>
         </section>
 
@@ -394,10 +394,10 @@
 
         <!-- Gemini Ask an Expert Section -->
         <section id="gemini-ask" class="py-12 my-8">
-            <h2 class="text-3xl font-bold text-center mb-8 text-[#739072]">✨ اسأل خبيرًا (مدعوم بـ Gemini)</h2>
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#739072]">✨ اسأل خبيرًا</h2>
             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl max-w-4xl mx-auto border-2 border-[#EAC696]">
                 <p class="text-center mb-6">هل لديك سؤال محدد حول الزكاة يتعلق بحالتك الشخصية؟ اكتب سؤالك هنا وسيقوم
-                    نموذج Gemini بتقديم إجابة فقهية إرشادية.</p>
+                    الذكاء الاصطناعي بتقديم إجابة فقهية إرشادية.</p>
                 <div class="rtl">
                     <textarea id="zakat-question" class="w-full p-3 border border-gray-300 rounded-lg mb-4" rows="4"
                         placeholder="مثال: أملك محلاً تجارياً، كيف أحسب زكاته مع العلم أن عليّ ديوناً؟"></textarea>
