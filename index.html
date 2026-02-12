@@ -513,12 +513,26 @@
             display.innerText = "...";
             if (displaySilver) displaySilver.innerText = "...";
 
-            try {
-                // Using a free API CORS proxy if needed, but data-asg.goldprice.org seems clear
-                const response = await fetch(`https://data-asg.goldprice.org/dbXRates/${currency}`);
-                if (!response.ok) throw new Error('Network response was not ok');
+            const url = `https://data-asg.goldprice.org/dbXRates/${currency}`;
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
 
-                const data = await response.json();
+            const fetchWithRetry = async (urls) => {
+                for (const u of urls) {
+                    try {
+                        const response = await fetch(u);
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return await response.json();
+                    } catch (e) {
+                        console.warn(`Failed to fetch from ${u}:`, e);
+                    }
+                }
+                throw new Error('All fetch attempts failed');
+            };
+
+            try {
+                // Try direct URL first, then proxy
+                const data = await fetchWithRetry([url, proxyUrl]);
+
                 // API returns price for 1 oz (approx 31.1035g)
                 // Example: {"items":[{"curr":"SAR","xauPrice":18625.135...}]}
                 if (data.items && data.items.length > 0) {
